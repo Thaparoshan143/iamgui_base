@@ -23,7 +23,7 @@ OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 UNAME_S := $(shell uname -s)
 LINUX_GL_LIBS = -lGL
 
-CXXFLAGS = -std=c++11 -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends
+CXXFLAGS = -std=c++11 -I$(IMGUI_DIR) -I../../includes/ -I$(IMGUI_DIR)/backends
 CXXFLAGS += -g -Wall -Wformat
 LIBS =
 
@@ -60,9 +60,9 @@ endif
 
 ifeq ($(OS), Windows_NT)
 	ECHO_MESSAGE = "MinGW"
-	LIBS += -lglfw3 -lgdi32 -lopengl32 -limm32
+	LIBS += -L. ../../includes/lib/win/libglfw3dll.a -lglfw3 -lgdi32 -lopengl32 -limm32
 
-	CXXFLAGS += `pkg-config --cflags glfw3`
+	# CXXFLAGS += `pkg-config --cflags glfw3`
 	CFLAGS = $(CXXFLAGS)
 endif
 
